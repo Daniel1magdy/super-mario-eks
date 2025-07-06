@@ -2,17 +2,11 @@ pipeline {
   agent any
 
   environment {
-    AWS_DEFAULT_REGION = 'us-east-1'
+    AWS_DEFAULT_REGION = 'eu-west-2'
   }
 
   stages {
-    stage('Checkout') {
-      steps {
-        checkout scm
-      }
-    }
-
-    stage('Terraform Init') {
+    stage('Init') {
       steps {
         dir('terraform') {
           sh 'terraform init'
@@ -20,7 +14,7 @@ pipeline {
       }
     }
 
-    stage('Terraform Apply') {
+    stage('Apply Infra') {
       steps {
         dir('terraform') {
           sh 'terraform apply -auto-approve'
@@ -28,15 +22,15 @@ pipeline {
       }
     }
 
-    stage('Configure Kubeconfig') {
+    stage('Configure kubectl') {
       steps {
         sh '''
-          aws eks update-kubeconfig --region us-east-1 --name super-mario-eks
+          aws eks update-kubeconfig --region eu-west-2 --name super-mario-eks
         '''
       }
     }
 
-    stage('Deploy to EKS') {
+    stage('Deploy App') {
       steps {
         sh '''
           kubectl apply -f kubernetes/deployment.yaml
@@ -46,3 +40,4 @@ pipeline {
     }
   }
 }
+

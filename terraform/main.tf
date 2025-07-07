@@ -1,5 +1,7 @@
 module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "5.1.1"  # ✅ Compatible with AWS provider ~> 5.0
+
   name   = "super-mario-vpc"
   cidr   = "10.0.0.0/16"
 
@@ -14,19 +16,22 @@ module "vpc" {
 }
 
 module "eks" {
-  source          = "terraform-aws-modules/eks/aws"
+  source  = "terraform-aws-modules/eks/aws"
+  version = "20.8.4"  # ✅ Compatible with AWS provider ~> 5.0
+
   cluster_name    = var.cluster_name
   cluster_version = "1.28"
-  subnet_ids      = module.vpc.public_subnets
-  vpc_id          = module.vpc.vpc_id
+
+  subnet_ids = module.vpc.public_subnets
+  vpc_id     = module.vpc.vpc_id
 
   manage_aws_auth_configmap = true
 
   eks_managed_node_groups = {
     free_tier_nodes = {
-      desired_size = 1
-      max_size     = 1
-      min_size     = 1
+      desired_size   = 1
+      max_size       = 1
+      min_size       = 1
 
       instance_types = ["t2.micro"]
       capacity_type  = "ON_DEMAND"

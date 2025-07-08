@@ -49,9 +49,9 @@ super-mario-eks/
 │   ├── variables.tf      # Input variables
 │   ├── backend.tf        # S3 + DynamoDB configuration
 |   ├── outputs.tf        # outputs used 
-|   └──provider.tf        # required providers as aws and kubernetes
+|   └── provider.tf        # required providers as aws and kubernetes
 ├── jenkins/              
-│   ├── Jenkinsfile       # CI/CD pipeline definition
+│   └── Jenkinsfile       # CI/CD pipeline definition
 ├── README.md             # Project documentation
 ```
 
@@ -138,4 +138,4 @@ terraform destroy -auto-approve
 
 ---
 
-# THANK YOU!
+## THANK YOU!

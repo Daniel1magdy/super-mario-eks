@@ -25,8 +25,6 @@ module "eks" {
   subnet_ids = module.vpc.public_subnets
   vpc_id     = module.vpc.vpc_id
 
-  manage_aws_auth_configmap = true
-
   eks_managed_node_groups = {
     free_tier_nodes = {
       desired_size   = 1

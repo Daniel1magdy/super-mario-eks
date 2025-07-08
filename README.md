@@ -130,11 +130,14 @@ terraform destroy -auto-approve
 ```
 
 
-## ✅ Final Outcome
+## ✅Conclusion & Final Outcome
+
+This setup provides an automated workflow for managing your EKS infrastructure and application deployments using Terraform and Jenkins CI/CD. It improves consistency, reduces manual errors, and integrates infrastructure changes directly into your version control and CI/CD processes.
 
 - Jenkins automates **end-to-end provisioning and deployment**
 - Your app is **live on the internet** behind a secure LoadBalancer
 - Code, infrastructure, and deployment are **fully automated and repeatable**
+
 
 ---
 

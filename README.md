@@ -47,8 +47,11 @@ super-mario-eks/
 ├── terraform/
 │   ├── main.tf           # Main infra logic (EKS, IAM, etc.)
 │   ├── variables.tf      # Input variables
-│   └── backend.tf        # S3 + DynamoDB configuration
-├── Jenkinsfile           # CI/CD pipeline definition
+│   ├── backend.tf        # S3 + DynamoDB configuration
+|   ├── outputs.tf        # outputs used 
+|   └──provider.tf        # required providers as aws and kubernetes
+├── jenkins/              
+│   ├── Jenkinsfile       # CI/CD pipeline definition
 ├── README.md             # Project documentation
 ```
 
@@ -76,9 +79,6 @@ super-mario-eks/
 - Jenkins applies:
   - `kubernetes/deployment.yaml` → Deploys Dockerized Super Mario
   - `kubernetes/service.yaml` → Creates a LoadBalancer
-
-### Get LoadBalancer URL
-- The app becomes accessible via the AWS-generated public LoadBalancer DNS.
 
 ---
 
@@ -129,39 +129,6 @@ cd terraform
 terraform destroy -auto-approve
 ```
 
----
-
-## 🔄 Rebuilding From Scratch
-
-```bash
-git clone https://github.com/your-username/super-mario-eks.git
-cd super-mario-eks
-# Run Jenkins Pipeline or manually:
-cd terraform
-terraform init
-terraform apply -auto-approve
-```
-
----
-
-## 📊 Auto Scaling Support
-
-To enable Auto Scaling:
-
-In `main.tf`:
-```hcl
-desired_size = 1
-min_size     = 1
-max_size     = 3
-```
-
-Or scale manually:
-```bash
-aws eks update-nodegroup-config --cluster-name super-mario-eks \
-  --nodegroup-name free_tier_nodes --scaling-config desiredSize=2,maxSize=3,minSize=1
-```
-
----
 
 ## ✅ Final Outcome
 

@@ -29,8 +29,8 @@ module "eks" {
 
   eks_managed_node_groups = {
     free_tier_nodes = {
-      desired_size   = 1
-      max_size       = 1
+      desired_size   = 2
+      max_size       = 2
       min_size       = 1
 
       instance_types = ["t2.micro"]

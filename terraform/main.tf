@@ -37,5 +37,8 @@ module "eks" {
       capacity_type  = "ON_DEMAND"
     }
   }
+  cluster_endpoint_public_access       = true
+  cluster_endpoint_private_access      = true
+  cluster_endpoint_public_access_cidrs = ["18.175.206.135/32"]
 }
 

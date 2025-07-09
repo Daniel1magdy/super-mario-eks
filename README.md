@@ -19,20 +19,6 @@ This project demonstrates a complete DevOps pipeline to deploy a containerized *
 | ALB          | LoadBalancer for public access to the deployed application             |
 | IAM Roles    | Secure access between Jenkins, EKS, and EC2                            |
 
----
-
-## 🏗️ Architecture Overview
-
-```
-GitHub Repo ────> Jenkins EC2 ────> Terraform ────> AWS Infrastructure:
-                                             └──> VPC
-                                             └──> EKS Cluster
-                                             └──> Node Group (EC2)
-                                             └──> S3 (state storage)
-                                             └──> DynamoDB (state locking)
-                                             └──> Super Mario App (Docker)
-                                                   └──> LoadBalancer
-```
 
 ---
 

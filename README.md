@@ -3,6 +3,22 @@
 This project demonstrates a complete DevOps pipeline to deploy a containerized **Super Mario game application** on AWS using **Terraform, EKS, Jenkins, GitHub, S3, and DynamoDB** — all configured using **Infrastructure as Code (IaC)** and built within the **AWS Free Tier** where possible.
 
 ---
+## 📌 Project Overview  
+
+### 🔹 Infrastructure Provisioning with Terraform  
+- Creates **VPC, subnets, IAM roles, EKS cluster, and worker node groups**.  
+- Stores Terraform state in **S3 with DynamoDB for state locking**.  
+
+### 🔹 CI/CD with Jenkins  
+- Automates **Terraform validation, planning, and applying**.  
+- Builds & deploys **Kubernetes manifests (Deployment + Service)**.  
+- Automates **rollouts and cleanup workflows**.  
+
+### 🔹 Application Deployment  
+- Deploys the **Super Mario containerized application**.  
+- Exposes the game via **Kubernetes LoadBalancer**.
+
+---
 
 ## 🧰 Tools & Technologies Used
 
@@ -66,21 +82,6 @@ super-mario-eks/
   - `kubernetes/deployment.yaml` → Deploys Dockerized Super Mario
   - `kubernetes/service.yaml` → Creates a LoadBalancer
 
----
-
-## 🌐 Accessing the Super Mario App
-
-Once deployed, run:
-
-```bash
-kubectl get svc super-mario-service
-```
-
-Look for the **EXTERNAL-IP** (LoadBalancer URL) and open it in your browser:
-
-```
-http://a1234567890abcdef.elb.eu-west-2.amazonaws.com
-```
 
 ---
 
@@ -97,24 +98,50 @@ Defined in `terraform/backend.tf`
 
 ---
 
-## 💸 Cost Optimization
 
-- Default EKS node uses `t2.micro` instance (**Free Tier eligible**)
-- Only **1 node** by default
-- All AWS services in **eu-west-2 (London)** region
-- **LoadBalancer (ELB)** is chargeable — destroy infra when not in use
+## 🏗️ Architecture  
+
+
+📌 *Insert your architecture diagram here:*  
+`![Architecture Diagram](./docs/architecture.png)`  
 
 ---
 
-## ⚠️ Stopping Chargeable Resources
+## 🔄 CI/CD Pipeline Workflow  
 
-To avoid charges:
+1. **Code Commit** → Developer pushes Terraform/Kubernetes changes.  
+2. **Jenkins Trigger** → Pipeline starts automatically.  
+3. **Terraform Stage** → Validate, plan, and apply AWS infrastructure.  
+4. **Kubernetes Stage** → Apply deployment and service manifests.  
+5. **Deployment Complete** → Super Mario app is live via LoadBalancer.  
 
-```bash
-cd terraform
-terraform destroy -auto-approve
-```
+---
 
+## ⚙️ Setup Instructions  
+
+### 1. Prerequisites  
+- AWS account with IAM permissions.  
+- Jenkins installed (on EC2 or server).  
+- Terraform installed (>= 1.2).  
+- kubectl installed.  
+- S3 bucket + DynamoDB table for remote Terraform state.  
+
+### 2. Configure AWS Credentials  
+Set the following in **Jenkins credentials** or environment variables:  
+- `AWS_ACCESS_KEY_ID`  
+- `AWS_SECRET_ACCESS_KEY`  
+- `AWS_DEFAULT_REGION`  
+
+### 3. Run Jenkins Pipeline  
+- Commit your Terraform & Kubernetes code.  
+- Run the Jenkins job → It will:  
+  - Provision AWS infra with Terraform.  
+  - Deploy Super Mario app to EKS.  
+
+### 4. Access the Application  
+- Get the LoadBalancer DNS:  
+  ```bash
+  kubectl get svc mario-service
 
 ## ✅ Conclusion & Final Outcome
 
@@ -128,3 +155,4 @@ This setup provides an automated workflow for managing your EKS infrastructure a
 ---
 
 ## THANK YOU!
+

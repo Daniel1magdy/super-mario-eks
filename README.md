@@ -102,7 +102,7 @@ Defined in `terraform/backend.tf`
 ## 🏗️ Architecture  
 
 
-`![Architecture Diagram](./diagram/Capture.PNG)`  
+`![Architecture Diagram](./diagram/Capture.jpg)`  
 
 ---
 
@@ -154,5 +154,6 @@ This setup provides an automated workflow for managing your EKS infrastructure a
 ---
 
 ## THANK YOU!
+
 
 
